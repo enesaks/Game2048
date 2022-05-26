@@ -1,0 +1,3 @@
+C:/Users/enesc/CLionProjects/2048game/cmake-build-debug/CMakeFiles/2048game.dir
+C:/Users/enesc/CLionProjects/2048game/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/enesc/CLionProjects/2048game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
