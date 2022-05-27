@@ -68,21 +68,6 @@ void rastgelesayiatama()//matrisin bos kismina rastgele 2 veya 4 atar.
 
 void oyunbitme()
 {
-    int i,j,sayacK;
-    for (i = 0; i < 4; ++i)
-    {
-        for (j = 0; j < 4; ++j)
-        {
-            if(map[i][j] != 0)
-            {
-                sayacK++;
-            }
-
-        }
-    }
-
-
-
     printf("Haraket edicek yer kalmadı...\n");
     printf("-----KAYBETINIZ-----\n\n");
     printf("Skorunuz : %d\n",skor);
