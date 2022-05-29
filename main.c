@@ -3,12 +3,13 @@
 #include <time.h>
 #include <conio.h>
 #include <ctype.h>
+
 #define randnum(min, max) ((rand() % (int) (((max) + 1) - (min))) + (min))
 
 int map[4][4] ={{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};//Ana map.
 int mapTemp[4][4]; //Dondurme icin.
 int mapTemp2[4][4] ={{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};//kontrol  icin.
-int skor = 0,sayac = 0;
+int skor = 0,sayac = 0,sayac1 = 0,sayac2 = 0,sayac3 = 0;
 char tus;
 
 void harita()//Matrisi ekrana basmak icin.
@@ -22,19 +23,24 @@ void harita()//Matrisi ekrana basmak icin.
     printf("\n");
     for (i = 0; i < 4; ++i)
     {
-        //printf("  |--------------------------------|\n");
         for (j = 0; j < 4; ++j)
         {
             printf("%4d ",map[i][j]);
         }
         printf("\n\n");
     }
-
-
 }
 
 void rastgelesayiatama()//matrisin bos kismina rastgele 2 veya 4 atar.
 {
+    int i,j;
+    sayac3 = 0;
+    for (i = 0; i < 4; ++i) {
+        for (j = 0; j < 4; ++j) {
+            if(map[i][j] != 0)
+            {sayac3++;}
+        }
+    }
     srand(time(NULL)); //her seferinde random deger atamak icin.
     int a=0,b=0,rastgelesayi,c =NULL;
     c = randnum(0,2); //Random olarak 2 mi 4 mu seciliyor.
@@ -46,39 +52,27 @@ void rastgelesayiatama()//matrisin bos kismina rastgele 2 veya 4 atar.
 
     a = randnum(0,3);
     b = randnum(0,3);
-    do
+    if(sayac3 != 16)
     {
-        if (map[a][b] == 0)
-        {
-            map[a][b] = rastgelesayi;
-            return;
-        } else {
-            a = randnum(0, 3);
-            b = randnum(0, 3);
-            continue;
-        }
-    } while (map[a][b] != 0);
+        do {
+            if (map[a][b] == 0) {
+                map[a][b] = rastgelesayi;
+                return;
+            } else {
+                a = randnum(0, 3);
+                b = randnum(0, 3);
+                continue;
+            }
+        } while (map[a][b] != 0);
 
-
-    map[a][b] = rastgelesayi;
-
-
-
-}
-
-void oyunbitme()
-{
-
-    printf("Haraket edicek yer kalmadı...\n");
-    printf("-----KAYBETINIZ-----\n\n");
-    printf("Skorunuz : %d\n",skor);
-    printf("Tekrar Baslamak Icin 'R' basiniz.");
-    tus = getch();
+        map[a][b] = rastgelesayi;
+    }
 }
 
 void kaydirma()//sayilari sola kaydirmak icin.
 {
     int temp,i,j,k;
+    sayac2 = 0;
     for (i = 0; i < 4; ++i)
     {
         for (j = 0; j < 4; ++j)
@@ -96,6 +90,8 @@ void kaydirma()//sayilari sola kaydirmak icin.
                     }
                 }
             }
+            else//Oyuncunun yanıp yanmadıgını anlamak icin.
+            {sayac2++;}
         }
     }
 }
@@ -103,6 +99,7 @@ void kaydirma()//sayilari sola kaydirmak icin.
 void toplama()//yan yana ayni olan sayilari toplamak icin.
 {
     int i,j;
+    sayac1 =0;
     for  (i = 0; i < 4; ++i)
     {
         for (j = 0; j < 4; ++j)
@@ -113,7 +110,8 @@ void toplama()//yan yana ayni olan sayilari toplamak icin.
                 skor += map[i][j];
                 map[i][j+1] = 0;
             }
-            if else()
+            else//Oyuncunun yanıp yanmadıgını anlamak icin.
+            {sayac1++;}
         }
     }
 }
@@ -122,7 +120,6 @@ void dondurme(int yon)//Matrisi dondurmek icin.
 {
     switch (yon)
     {
-
         int j,i,k;
         case 0: //bos
             break;
@@ -209,7 +206,6 @@ void kontrol()//islem yapamadiginda rastgele sayı gelmesin diye.
     }
     if(kontrol1 != 16)
     {
-        printf("%d",kontrol1);
         rastgelesayiatama();
     }
     for (i = 0; i < 4; ++i) {
@@ -249,11 +245,24 @@ void winkontrol()//Oyuncunun 2048 e ulaşıp ulaşmadığını kontrol eder.
     }
 }
 
-
+void oyunbitme()//Yaninca cikan son ekran.
+{
+    if(sayac1 == 16 && sayac2 == 16)
+    {
+        system("CLS");
+        system("color 9f");
+        printf("Haraket edicek yer kalmadi...\n");
+        printf("--------KAYBETINIZ--------\n\n");
+        printf("Skorunuz : %d\n", skor);
+        printf("Cikmak icin enter'a basiniz...");
+        getchar();
+        tus = 113;
+    }
+}
 
 int main()
 {
-
+    //setlocale(LC_ALL,'Turkish');
     info();
     harita();
     rastgelesayiatama();
@@ -311,10 +320,8 @@ int main()
             }
                 break;
         }
+        oyunbitme();
         kontrol();
-
-
     }while (tus != 113); // q = 113 cikis icin
-
     return 0;
 }
