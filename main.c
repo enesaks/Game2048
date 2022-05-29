@@ -54,6 +54,7 @@ void rastgelesayiatama()//matrisin bos kismina rastgele 2 veya 4 atar.
     b = randnum(0,3);
     if(sayac3 != 16)
     {
+<<<<<<< HEAD
         do {
             if (map[a][b] == 0) {
                 map[a][b] = rastgelesayi;
@@ -67,6 +68,33 @@ void rastgelesayiatama()//matrisin bos kismina rastgele 2 veya 4 atar.
 
         map[a][b] = rastgelesayi;
     }
+=======
+        if (map[a][b] == 0)
+        {
+            map[a][b] = rastgelesayi;
+            return;
+        } else {
+            a = randnum(0, 3);
+            b = randnum(0, 3);
+            continue;
+        }
+    } while (map[a][b] != 0);
+
+
+    map[a][b] = rastgelesayi;
+
+
+
+}
+
+void oyunbitme()
+{
+    printf("Haraket edicek yer kalmadı...\n");
+    printf("-----KAYBETINIZ-----\n\n");
+    printf("Skorunuz : %d\n",skor);
+    printf("Tekrar Baslamak Icin 'R' basiniz.");
+    tus = getch();
+>>>>>>> f3c886dcccacea6443c502b3028e387f4e2f40f1
 }
 
 void kaydirma()//sayilari sola kaydirmak icin.
