@@ -5,6 +5,9 @@ C ile Yazılan Konsol da Oynanan 2048 Oyunu İndirmek İçin Tıkla  ---> [2048g
 
 ![2048game](https://github.com/enesaks/Game2048/assets/98012557/53ed97e5-cc61-418e-ab7a-b1a11b0a8b3f)
 
+
+# Game2048 Kodları
+
 Ekrana Matrisi Bastırmak İçin Olan Kod 
 
     void harita()//Matrisi ekrana basmak icin.
